@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+            background-image: url('images/nature-background.jpg'); /* Path to your background image */
+            background-size: cover; /* Ensures the image covers the entire background */
+            background-position: center; /* Centers the image */
+            background-repeat: no-repeat; /* Prevents the image from repeating */
+            color: #333; /* Adjust text color for better readability */
+            min-height: 100vh; /* Ensures the background covers the full height of the page */
+        }
+        .question {
+            margin-bottom: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for questions */
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        .hidden { display: none; }
+        #qrCode {
+            margin-top: 20px;
+            width: 200px;
+        }
+        .image-button {
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+        .image-button img {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>GitHub Quiz</h1>
+    
+    <div id="quiz">
+        <div class="question" id="q1">
+            <p><strong>1. What is a GitHub repository?</strong></p>
+            <button onclick="checkAnswer(1, 'B')">A) A place to store only Python files</button>
+            <button onclick="checkAnswer(1, 'B')">B) A collection of files and version history</button>
+            <button onclick="checkAnswer(1, 'B')">C) A list of websites</button>
+            <button onclick="checkAnswer(1, 'B')">D) A type of database</button>
+        </div>
+
+        <div class="question hidden" id="q2">
+            <p><strong>2. Which command is used to clone a repository?</strong></p>
+            <button onclick="checkAnswer(2, 'B')">A) git push origin main</button>
+            <button onclick="checkAnswer(2, 'B')">B) git clone &lt;repo-url&gt;</button>
+            <button onclick="checkAnswer(2, 'B')">C) git commit -m 'cloned repo'</button>
+            <button onclick="checkAnswer(2, 'B')">D) git fetch</button>
+        </div>
+
+        <div class="question hidden" id="q3">
+            <p><strong>3. What file is commonly used to describe a repository on GitHub?</strong></p>
+            <button onclick="checkAnswer(3, 'C')">A) repo.txt</button>
+            <button onclick="checkAnswer(3, 'C')">B) description.md</button>
+            <button onclick="checkAnswer(3, 'C')">C) README.md</button>
+            <button onclick="checkAnswer(3, 'C')">D) index.html</button>
+        </div>
+
+        <div class="question hidden" id="q4">
+            <p><strong>4. Which GitHub logo is correct?</strong></p>
+            <button class="image-button" onclick="checkAnswer(4, 'A')"><img src="images/github-logo-a.png" alt="GitHub Logo A"></button>
+            <button class="image-button" onclick="checkAnswer(4, 'A')"><img src="images/github-logo-b.png" alt="GitHub Logo B"></button>
+            <button class="image-button" onclick="checkAnswer(4, 'A')"><img src="images/github-logo-c.png" alt="GitHub Logo C"></button>
+            <button class="image-button" onclick="checkAnswer(4, 'A')"><img src="images/github-logo-d.png" alt="GitHub Logo D"></button>
+        </div>
+    </div>
+    
+    <img id="qrCode" class="hidden" src="images/qr-code.png" alt="QR Code"> 
+
+    <script>
+        let currentQuestion = 1;
+
+        function checkAnswer(question, correct) {
+            const buttons = document.querySelectorAll(`#q${question} button`);
+            buttons.forEach(btn => btn.disabled = true);
+            
+            if ((correct === 'B' && question === 1) || (correct === 'B' && question === 2) || (correct === 'C' && question === 3) || (correct === 'A' && question === 4)) {
+                document.getElementById(`q${question}`).style.display = 'none';
+                currentQuestion++;
+                if (currentQuestion <= 4) {
+                    document.getElementById(`q${currentQuestion}`).classList.remove('hidden');
+                } else {
+                    document.getElementById('qrCode').classList.remove('hidden');
+                }
+            } else {
+                alert('Wrong answer! Try again.');
+                buttons.forEach(btn => btn.disabled = false);
+            }
+        }
+    </script>
+</body>
+</html>
