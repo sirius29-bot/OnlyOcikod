@@ -10,7 +10,7 @@
             text-align: center;
             padding: 20px;
             margin: 0;
-            background-image: url('images/nature-background.jpg'); /* Path to your background image */
+            background-image: url('images/masin.jpg'); /* Path to your background image */
             background-size: cover; /* Ensures the image covers the entire background */
             background-position: center; /* Centers the image */
             background-repeat: no-repeat; /* Prevents the image from repeating */
@@ -45,48 +45,57 @@
     
     <div id="quiz">
         <div class="question" id="q1">
-            <p><strong>1. What is a GitHub repository?</strong></p>
-            <button onclick="checkAnswer(1, 'B')">A) A place to store only Python files</button>
-            <button onclick="checkAnswer(1, 'B')">B) A collection of files and version history</button>
-            <button onclick="checkAnswer(1, 'B')">C) A list of websites</button>
-            <button onclick="checkAnswer(1, 'B')">D) A type of database</button>
+            <p><strong>1. Ухаан жолоог минь алдуулал татсан тэр охинийг хэлээч?</strong></p>
+            <button onclick="checkAnswer(1, 'A')">A) オチゲレル</button> <!-- All options correct -->
+            <button onclick="checkAnswer(1, 'B')">B) 私</button>
+            <button onclick="checkAnswer(1, 'C')">C) I</button>
+            <button onclick="checkAnswer(1, 'D')">D) ᠣᠴᠢᢉᠡᠷᠡᠯ</button>
         </div>
 
         <div class="question hidden" id="q2">
-            <p><strong>2. Which command is used to clone a repository?</strong></p>
-            <button onclick="checkAnswer(2, 'B')">A) git push origin main</button>
-            <button onclick="checkAnswer(2, 'B')">B) git clone &lt;repo-url&gt;</button>
-            <button onclick="checkAnswer(2, 'B')">C) git commit -m 'cloned repo'</button>
-            <button onclick="checkAnswer(2, 'B')">D) git fetch</button>
+            <p><strong>2. Миний өндөр хэд вэ?</strong></p>
+            <button onclick="checkAnswer(2, 'A')">A) 189cm</button>
+            <button onclick="checkAnswer(2, 'B')">B) 169cm</button> <!-- Correct answer -->
+            <button onclick="checkAnswer(2, 'C')">C) 163cm</button>
+            <button onclick="checkAnswer(2, 'D')">D) 195cm</button>
         </div>
 
         <div class="question hidden" id="q3">
-            <p><strong>3. What file is commonly used to describe a repository on GitHub?</strong></p>
-            <button onclick="checkAnswer(3, 'C')">A) repo.txt</button>
-            <button onclick="checkAnswer(3, 'C')">B) description.md</button>
-            <button onclick="checkAnswer(3, 'C')">C) README.md</button>
-            <button onclick="checkAnswer(3, 'C')">D) index.html</button>
+            <p><strong>3. Миний чамд хайртай шалтгаан?</strong></p>
+            <button onclick="checkAnswer(3, 'A')">A) ухаантай</button>
+            <button onclick="checkAnswer(3, 'B')">B) хөөрхөн</button>
+            <button onclick="checkAnswer(3, 'C')">C) зоригтой</button>
+            <button onclick="checkAnswer(3, 'D')">D) бүгд</button> <!-- Correct answer -->
         </div>
 
         <div class="question hidden" id="q4">
-            <p><strong>4. Which GitHub logo is correct?</strong></p>
-            <button class="image-button" onclick="checkAnswer(4, 'A')"><img src="images/github-logo-a.png" alt="GitHub Logo A"></button>
-            <button class="image-button" onclick="checkAnswer(4, 'A')"><img src="images/github-logo-b.png" alt="GitHub Logo B"></button>
-            <button class="image-button" onclick="checkAnswer(4, 'A')"><img src="images/github-logo-c.png" alt="GitHub Logo C"></button>
-            <button class="image-button" onclick="checkAnswer(4, 'A')"><img src="images/github-logo-d.png" alt="GitHub Logo D"></button>
+            <p><strong>4. Дуртай зүрхээ дагаарай😇</strong></p>
+            <button class="image-button" onclick="checkAnswer(4, 'A')"><img src="images/1.jpg" alt="111"></button> <!-- All options correct -->
+            <button class="image-button" onclick="checkAnswer(4, 'B')"><img src="images/2.jpeg" alt="222"></button>
+            <button class="image-button" onclick="checkAnswer(4, 'C')"><img src="images/4.jpg" alt="333 C"></button>
+            <button class="image-button" onclick="checkAnswer(4, 'D')"><img src="images/3.jpeg" alt="444"></button>
         </div>
     </div>
     
-    <img id="qrCode" class="hidden" src="images/qr-code.png" alt="QR Code"> 
+    <img id="qrCode" class="hidden" src="images/qr1.png" alt="Баяр хүргэе хөөрхөнөө😊 ахиад нэг удаа уншуулаарай хэхэх"> 
 
     <script>
         let currentQuestion = 1;
 
-        function checkAnswer(question, correct) {
+        function checkAnswer(question, selected) {
             const buttons = document.querySelectorAll(`#q${question} button`);
             buttons.forEach(btn => btn.disabled = true);
             
-            if ((correct === 'B' && question === 1) || (correct === 'B' && question === 2) || (correct === 'C' && question === 3) || (correct === 'A' && question === 4)) {
+            // Correct answer logic
+            const correctAnswers = {
+                1: true, // Q1: All answers are valid
+                2: 'B',  // Q2: Correct answer
+                3: 'D',  // Q3: Correct answer
+                4: true   // Q4: All answers are valid
+            };
+
+            // Check if the answer is correct
+            if (correctAnswers[question] === true || selected === correctAnswers[question]) {
                 document.getElementById(`q${question}`).style.display = 'none';
                 currentQuestion++;
                 if (currentQuestion <= 4) {
@@ -95,7 +104,7 @@
                     document.getElementById('qrCode').classList.remove('hidden');
                 }
             } else {
-                alert('Wrong answer! Try again.');
+                alert('Жаахан зөрчлөө ахиад сонгоорой гүнж минь😊');
                 buttons.forEach(btn => btn.disabled = false);
             }
         }
