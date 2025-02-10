@@ -38,21 +38,31 @@
             width: 100px;
             height: 100px;
         }
+        input[type="text"] {
+            width: 200px;
+            padding: 5px;
+            font-size: 15px;
+            margin: 5px;
+        }
     </style>
 </head>
 <body>
     <h1>GitHub Quiz</h1>
     
     <div id="quiz">
-        <div class="question" id="q1">
-            <p><strong>1. Миний Ухаан жолоог алдуулан хайранд живүүлсэн тэр охин?</strong></p>
+        <p> The day u came to this world💐 (YYYY.MM.DD):</p>
+        <input id="birthday" type="text" placeholder="2005.04.23">
+        <button onclick="checkUserInfo()">Submit</button>
+        
+        <div class="hidden" id="q1">
+            <p><strong>1. Ухаан жолоог минь алдуулал татсан тэр охинийг хэлээч?</strong></p>
             <button onclick="checkAnswer(1, 'A')">A) オチゲレル</button> <!-- All options correct -->
             <button onclick="checkAnswer(1, 'B')">B) 私</button>
             <button onclick="checkAnswer(1, 'C')">C) I</button>
             <button onclick="checkAnswer(1, 'D')">D) ᠣᠴᠢᢉᠡᠷᠡᠯ</button>
         </div>
 
-        <div class="question hidden" id="q2">
+        <div class="hidden" id="q2">
             <p><strong>2. Миний өндөр хэд вэ?</strong></p>
             <button onclick="checkAnswer(2, 'A')">A) 189cm</button>
             <button onclick="checkAnswer(2, 'B')">B) 169cm</button> <!-- Correct answer -->
@@ -60,7 +70,7 @@
             <button onclick="checkAnswer(2, 'D')">D) 195cm</button>
         </div>
 
-        <div class="question hidden" id="q3">
+        <div class="hidden" id="q3">
             <p><strong>3. Миний чамд хайртай шалтгаан?</strong></p>
             <button onclick="checkAnswer(3, 'A')">A) ухаантай</button>
             <button onclick="checkAnswer(3, 'B')">B) хөөрхөн</button>
@@ -68,12 +78,12 @@
             <button onclick="checkAnswer(3, 'D')">D) бүгд</button> <!-- Correct answer -->
         </div>
 
-        <div class="question hidden" id="q4">
+        <div class="hidden" id="q4">
             <p><strong>4. Дуртай зүрхээ дагаарай😇</strong></p>
-            <button class="image-button" onclick="checkAnswer(4, 'A')"><img src="images/1.jpg" alt="111"></button> <!-- All options correct -->
-            <button class="image-button" onclick="checkAnswer(4, 'B')"><img src="images/2.jpeg" alt="222"></button>
-            <button class="image-button" onclick="checkAnswer(4, 'C')"><img src="images/4.jpg" alt="333 C"></button>
-            <button class="image-button" onclick="checkAnswer(4, 'D')"><img src="images/3.jpeg" alt="444"></button>
+            <button class="image-button" onclick="checkAnswer(4, 'A')"><img src="images/1.jpg" alt="GitHub Logo A"></button> <!-- All options correct -->
+            <button class="image-button" onclick="checkAnswer(4, 'B')"><img src="images/2.jpeg" alt="GitHub Logo B"></button>
+            <button class="image-button" onclick="checkAnswer(4, 'C')"><img src="images/3.jpeg" alt="GitHub Logo C"></button>
+            <button class="image-button" onclick="checkAnswer(4, 'D')"><img src="images/4.jpg" alt="GitHub Logo D"></button>
         </div>
     </div>
     
@@ -82,17 +92,29 @@
     <script>
         let currentQuestion = 1;
 
+        function checkUserInfo() {
+            const birthday = document.getElementById('birthday').value.trim();
+
+            // Check if the input is one of the valid formats
+            if (birthday === "2005.04.23" || birthday === "2005.4.23") {
+                document.getElementById('birthday').disabled = true;
+                document.querySelector('button').style.display = 'none';
+                document.getElementById(`q${currentQuestion}`).classList.remove('hidden');
+            } else {
+                alert('Sorry its not for you');
+            }
+        }
+
         function checkAnswer(question, selected) {
             const buttons = document.querySelectorAll(`#q${question} button`);
             buttons.forEach(btn => btn.disabled = true);
-            
+
             // Correct answer logic
             const correctAnswers = {
-            
-                1: true, // Q1: All answers are valid
+                1: true,  // Q1: All answers are valid
                 2: 'B',  // Q2: Correct answer
                 3: 'D',  // Q3: Correct answer
-                4: true   // Q4: All answers are valid
+                4: true   // Q4: All answers are valid (not used)
             };
 
             // Check if the answer is correct
@@ -105,7 +127,7 @@
                     document.getElementById('qrCode').classList.remove('hidden');
                 }
             } else {
-                alert('Жаахан зөрчлөө ахиад сонгоорой гүнж минь😊');
+                alert('Wrong answer! Try again.');
                 buttons.forEach(btn => btn.disabled = false);
             }
         }
